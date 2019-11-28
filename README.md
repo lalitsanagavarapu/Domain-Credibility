@@ -1,10 +1,10 @@
 # WebCred-Api
 Currently adopted method is the Gradient boosted decision tree.(XGBoost/LightGBM)  
-This works well with tabular datasets. 
-Features were orthogonal .
+This works well with tabular datasets.<br>
+Features were orthogonal.<br>
 Anova was used over mutual gain for feature reduction.
 
-If we need a webpage data based classfication ,we may need to use BERT.
+
 
 ### Dependencies: 
 NLTK and BeautifulSoup.<br>
@@ -12,6 +12,9 @@ EasyList.<br>
 Yslow with PhantomJS <br>
 Merceine API <br> 
 WebArchives API <br>
+StanfordCoreNLP Library<br> 
+URLLib (python)<br> 
+
 
 
 
@@ -23,6 +26,9 @@ WebArchives API <br>
 -- BERT (Used by google for youtube searches) <br>
 4. Check Zenserp api<br>
 5.What should be the search bias? <br> 
+
+
+
 
 
 
