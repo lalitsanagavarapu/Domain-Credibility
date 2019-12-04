@@ -1,0 +1,48 @@
+asylum	fruit	0.21	0.30
+autograph	shore	0.29	0.16
+autograph	signature	0.55	0.82
+automobile	car	0.64	1.00
+bird	woodland	0.33	0.20
+boy	rooster	0.53	0.11
+boy	lad	0.66	0.82
+boy	sage	0.51	0.37
+cemetery	graveyard	0.73	1.00
+coast	forest	0.36	0.36
+coast	shore	0.76	0.80
+cock	rooster	1.00	1.00
+cord	smile	0.33	0.13
+cord	string	0.68	0.82
+cushion	pillow	0.66	0.82
+forest	graveyard	0.55	0.20
+forest	woodland	0.70	0.98
+furnace	stove	0.72	0.17
+glass	tumbler	0.65	0.82
+grin	smile	0.49	0.99
+gem	jewel	0.83	1.00
+hill	woodland	0.59	0.36
+hill	mound	0.74	0.99
+implement	tool	0.75	0.82
+journey	voyage	0.52	0.82
+magician	oracle	0.44	0.30
+magician	wizard	0.65	1.00
+midday	noon	1.00	1.00
+oracle	sage	0.43	0.37
+serf	slave	0.39	0.55
+I like that bachelor.	I like that unmarried man.	0.561	0.844	0.800
+John is very nice.	Is John very nice?	0.977	0.891	0.969
+Red alcoholic drink.	A bottle of wine.	0.585	0.697	0.697
+Red alcoholic drink.	Fresh orange juice.	0.611	0.804	0.716
+Red alcoholic drink.	An English dictionary.	0.000	0.819	0.781
+Red alcoholic drink.	Fresh apple juice.	0.420	0.779	0.679
+A glass of cider.	A full cup of apple juice.	0.678	0.835	0.743
+It is a dog.	That must be your dog.	0.739	0.764	0.751
+It is a dog.	It is a log.	0.623	0.895	0.860
+It is a dog.	It is a pig.	0.790	0.875	0.839
+Dogs are animals.	They are common pets.	0.738	0.768	0.732
+Canis familiaris are animals.	Dogs are common pets.	0.362	0.741	0.732
+I have a pen.	Where do you live?	0.000	0.585	0.648
+I have a pen.	Where is ink?	0.129	0.596	0.691
+I have a hammer.	Take some nails.	0.508	0.682	0.630
+I have a hammer.	Take some apples.	0.121	0.638	0.580
+RAM keepsthings being worked with	The CPU uses RAM as ashort-term memory store	0.552	0.697	0.697
+
