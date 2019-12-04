@@ -1,4 +1,5 @@
-#Original code(depiracated for python3)[Link](http://sujitpal.blogspot.com/2014/12/semantic-similarity-for-short-sentences.html)
+Original code(depriacated for python3)
+[Link](http://sujitpal.blogspot.com/2014/12/semantic-similarity-for-short-sentences.html)
 
 
 Code updated to run in python3 <br>
@@ -7,7 +8,7 @@ Implementation of the paper Sentence Similarity Based on Semantic Nets and corpu
 Can be used in webcred api for ranking webpages based on query word<br>
 
 
-##TO-DO
+## TO-DO
 
 Word Mover's Distance is a promising new tool in machine learning that allows us to 
 submit a query and return the most relevant documents<br>
@@ -19,8 +20,8 @@ It been shown to outperform many of the state-of-the-art methods in k-nearest ne
 
 
 
-###Functions explained:
----------------------
+### Functions explained:
+
 1.get_best_synset_pair<br>
 
     Choose the pair with highest path similarity among all pairs.
