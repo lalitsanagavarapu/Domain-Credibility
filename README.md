@@ -32,24 +32,24 @@ URLlib<br>
 
 2/12/19
 --
-1.Current credibility is based on URL. 
+1.Current credibility is based on URL. <br> 
 Issues:
 -
-1.Fixing WebCred repository,updating doc.
-2.Peer connection closing for some websites (timeout)
-3.Database on remote machine, to be made usable on local machine.
+1.Fixing WebCred repository,updating doc.<br> 
+2.Peer connection closing for some websites (timeout)<br> 
+3.Database on remote machine, to be made usable on local machine.<br> 
 
 3/12/19
 -
 Task:
 -
-1.Generate word similarity scores, search for query word in knowledge graph and return pages ranked in order of this score( another aspect of credibility for query words/sentences).
-2.Gensim Word2Vec/Doc2Vec
-3.Which searching algorithm to use? (or can we just brute force?)
-4.TF-IDF used by SOLR 
-5.Can the knowledge graph be a KDTree(get nearest neighbour words of a new vector)
-6.Reference ontology on security. 
-7.Api for the above , plugin development .
+1.Generate word similarity scores, search for query word in knowledge graph and return pages ranked in order of this score( another aspect of credibility for query words/sentences).<br> 
+2.Gensim Word2Vec/Doc2Vec<br> 
+3.Which searching algorithm to use? (or can we just brute force?)<br> 
+4.TF-IDF used by SOLR <br> 
+5.Can the knowledge graph be a KDTree(get nearest neighbour words of a new vector)<br> 
+6.Reference ontology on security. <br> 
+7.Api for the above , plugin development .<br> 
 
 
 
