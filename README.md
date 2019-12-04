@@ -32,7 +32,6 @@ URLlib<br>
 
 2/12/19
 --
-1.Current credibility is based on URL. <br> 
 Issues:
 -
 1.Fixing WebCred repository,updating doc.<br> 
