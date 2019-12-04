@@ -13,12 +13,14 @@ Yslow with PhantomJS <br>
 Merceine API <br> 
 WebArchives API <br>
 StanfordCoreNLP Library<br> 
-URLLib (python)<br> 
+URLlib<br> 
 
 
 
 
-#### Thoughts/Ideas ::
+#### Ideas ::
+28/11/19
+-------
 1.Siamese Net (pairwise comparision, how to design triplet loss) <br>
 2.Relevancy Sorting (Used by google, fine-tuned mix of a lot of stuff)<br>
 3.For a security search engine specific task, and since this is credibility assessment<br>
@@ -26,7 +28,31 @@ URLLib (python)<br>
 -- BERT (Used by google for youtube searches) <br>
 4. Check Zenserp api<br>
 5.What should be the search bias? <br> 
-5.MultiLabel genres? <br>
+6.MultiLabel genres? <br>
+
+2/12/19
+--
+1.Current credibility is based on URL. 
+Issues:
+-
+1.Fixing WebCred repository,updating doc.
+2.Peer connection closing for some websites (timeout)
+3.Database on remote machine, to be made usable on local machine.
+
+3/12/19
+-
+Task:
+-
+1.Generate word similarity scores, search for query word in knowledge graph and return pages ranked in order of this score( another aspect of credibility for query words/sentences).
+2.Gensim Word2Vec/Doc2Vec
+3.Which searching algorithm to use? (or can we just brute force?)
+4.TF-IDF used by SOLR 
+5.Can the knowledge graph be a KDTree(get nearest neighbour words of a new vector)
+6.Reference ontology on security. 
+7.Api for the above , plugin development .
+
+
+
 
 
 
