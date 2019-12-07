@@ -23,12 +23,24 @@ URLlib<br>
 -------
 1.Siamese Net (pairwise comparision, how to design triplet loss) <br>
 2.Relevancy Sorting (Used by google, fine-tuned mix of a lot of stuff)<br>
-3.For a security search engine specific task, and since this is credibility assessment<br>
+
+30/11/19
+- 
+1.For a security search engine specific task, and since this is credibility assessment<br>
 -- Inverse Reinforcement learning. (targetted recommendations) <br>
 -- BERT (Used by google for youtube searches) <br>
-4. Check Zenserp api<br>
-5.What should be the search bias? <br> 
-6.MultiLabel genres? <br>
+2. Check Zenserp api<br>
+3.What should be the search bias? <br> 
+4.MultiLabel genres? <br>
+
+1/12/19
+-
+1.Setup the environment to run existing code. <br>
+2.Postgres DB<br>
+3.WebCred-dev Up and running (always gives default values as output, timeouts for some urls and exceptions as well)
+4.Need to fix WebcCred-dev.
+<br>
+
 
 2/12/19
 --
@@ -37,6 +49,7 @@ Issues:
 1.Fixing WebCred repository,updating doc.<br> 
 2.Peer connection closing for some websites (timeout)<br> 
 3.Database on remote machine, to be made usable on local machine.<br> 
+
 
 3/12/19
 -
@@ -52,8 +65,14 @@ Task:
 
 
 
-
-
+4/12/19
+-
+1.Doc2Vec or Word2Vec <br>
+2.WDM better for words which have nothing in common. <br>
+3.Implemented BFS/DFS for finding similar words in the knowledge graph for the given list of words/word<br>
+4.Research more on which approach would be better ? Do we need to implement KdTrees? <br>
+5.Glove/Gensim
+6.Find all child urls of a given url.
 
 
 
