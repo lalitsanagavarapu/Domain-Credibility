@@ -62,6 +62,7 @@ Task:
 5.Can the knowledge graph be a KDTree(get nearest neighbour words of a new vector)<br> 
 6.Reference ontology on security. <br> 
 7.Api for the above , plugin development .<br> 
+8.[Webcred](https://github.com/SIREN-SERC/WEBCred)
 
 
 
@@ -71,8 +72,22 @@ Task:
 2.WDM better for words which have nothing in common. <br>
 3.Implemented BFS/DFS for finding similar words in the knowledge graph for the given list of words/word<br>
 4.Research more on which approach would be better ? Do we need to implement KdTrees? <br>
-5.Glove/Gensim
-6.Find all child urls of a given url.
+5.Glove/Gensim<br>
+6.Find all child urls of a given url.<br>
+
+5/12/19
+- 
+1.Looked up page ranking<br>
+2.Looked into Facebook FAISS<br>
+3.Find advanced ranking algorithms<br>
+
+6/12/19
+-
+1.Which model to use ?<br>
+2.Implemented Sentence Similarity using wordnet based on a paper.<br>
+3.TO-DO: Update existing code to python3.x <br>
+4.[Webcred-dev](https://github.com/SIREN-SERC/WEBCred-dev) still has some issues to be resolved.<br>
+
 
 
 
