@@ -1,0 +1,135 @@
+### Cleaning Text Data
+
+The raw input text is cleaned off non-printable characters (if any) and turned into lower case.
+The processed input text is then tokenized using NLTK library functions. 
+
+
+
+
+### POS Tagging For Lemmatization
+
+NLTK is again used for <b>POS tagging</b> the input text so that the words can be lemmatized based on their POS tags.
+
+Description of POS tags: 
+
+
+http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html
+
+
+### Lemmatization
+
+The tokenized text (mainly the nouns and adjectives) is normalized by <b>lemmatization</b>.
+In lemmatization different grammatical counterparts of a word will be replaced by single
+basic lemma. For example, 'glasses' may be replaced by 'glass'. 
+
+Details about lemmatization: 
+    
+https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.htm
+
+### POS tagging for Filtering
+
+The <b>lemmatized text</b> is <b>POS tagged</b> here. The tags will be used for filtering later on.
+
+
+
+## POS Based Filtering
+
+Any word from the lemmatized text, which isn't a noun, adjective, or gerund (or a 'foreign word'), is here
+considered as a <b>stopword</b> (non-content). This is based on the assumption that usually keywords are noun,
+adjectives or gerunds. 
+
+Punctuations are added to the stopword list as well.
+
+
+### Complete stopword generation
+
+Even if we remove the aforementioned stopwords, still some extremely common nouns, adjectives or gerunds may
+remain which are very bad candidates for being keywords (or part of it). 
+
+An external file constituting a long list of stopwords is loaded and all the words are added with the previous
+stopwords to create the final list 'stopwords-plus' which is then converted into a set. 
+
+(Source of stopwords data: https://www.ranks.nl/stopwords)
+
+Stopwords-plus constitute the sum total of all stopwords and potential phrase-delimiters. 
+
+(The contents of this set will be later used to partition the lemmatized text into n-gram phrases. For now ,use bag of words .)
+Graph is developed using unigram texts as vertices
+
+
+
+
+### Removing Stopwords 
+
+Removing stopwords from lemmatized_text. 
+Processeced_text condtains the result.
+
+## Vocabulary Creation
+
+Vocabulary will only contain unique words from processed_text.
+
+### Building Graph
+
+TextRank is a graph based model, and thus it requires us to build a graph. Each words in the vocabulary will serve as a vertex for graph. The words will be represented in the vertices by their index in vocabulary list.  
+
+The weighetd_edge matrix contains the information of edge connections among all vertices.
+I am building a graph with wieghted undirected edges.
+
+weighted_edge[i][j] contains the weight of the connecting edge between the word vertex represented by vocabulary index i and the word vertex represented by vocabulary j.
+
+If weighted_edge[i][j] is zero, it means no edge or connection is present between the words represented by index i and j.
+
+There is a connection between the words (and thus between i and j which represents them) if the words co-occur within a window of a specified 'window_size' in the processed_text.
+
+The value of the weighted_edge[i][j] is increased by (1/(distance between positions of words currently represented by i and j)) for every connection discovered between the same words in different locations of the text. 
+
+The covered_coocurrences list (which is contain the list of pairs of absolute positions in processed_text of the words whose coocurrence at that location is already checked) is managed so that the same two words located in the same positions in processed_text are not repetitively counted while sliding the window one text unit at a time.
+
+The score of all vertices are intialized to one. 
+
+Self-connections are not considered, so weighted_edge[i][i] will be zero.
+
+
+### Calculating weighted summation of connections of a vertex
+
+inout[i] will contain the total no. of undirected connections\edges associated withe the vertex represented by i.
+
+
+### Scoring Vertices
+
+The formula used for scoring a vertex represented by i is:
+
+score[i] = (1-d) + d x [ Summation(j) ( (weighted_edge[i][j]/inout[j]) x score[j] ) ] where j belongs to the list of vertices that has a connection with i. 
+
+d is the damping factor.
+
+The score is iteratively updated until convergence. 
+
+
+
+### Phrase Partitioning
+
+Paritioning lemmatized_text into phrases using the stopwords in it as delimeters.
+The phrases are also candidates for keyphrases to be extracted. 
+
+
+### Create a list of unique phrases.
+
+Repeating phrases\keyphrase candidates has no purpose here, anymore. 
+
+
+
+### Thinning the list of candidate-keyphrases.
+
+Removing single word keyphrase-candidates that are present multi-word alternatives. 
+
+### Scoring Keyphrases
+
+Scoring the phrases (candidate keyphrases) and building up a list of keyphrases
+by listing untokenized versions of tokenized phrases\candidate-keyphrases.
+Phrases are scored by adding the score of their members (words\text-units that were ranked by the graph algorithm)
+
+
+### Ranking Keyphrases
+
+Ranking keyphrases based on their calculated scores. Displaying top 'keywords_num' no. of keyphrases.
