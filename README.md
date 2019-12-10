@@ -90,7 +90,7 @@ Task:
 
 9/12/19
 -
-1.Implemented Textranking for keyword extraction
+1.Implemented Textranking for keyword extraction<br>
 2.Understood POS Tagging,Lemmatization,stopword removal and vocabulary creation.Built a knowledge graph from scratch for the vocabulary created.
 Assigned scores to vertices. <br>
 3.Ranked keyphrases. The above implementation was completely based on a paper cited<br>.
