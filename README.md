@@ -88,7 +88,16 @@ Task:
 3.TO-DO: Update existing code to python3.x <br>
 4.[Webcred-dev](https://github.com/SIREN-SERC/WEBCred-dev) still has some issues to be resolved.<br>
 
+9/12/19
+-
+1.Implemented Textranking for keyword extraction
+2.Understood POS Tagging,Lemmatization,stopword removal and vocabulary creation.Built a knowledge graph from scratch for the vocabulary created.
+Assigned scores to vertices. <br>
+3.Ranked keyphrases. The above implementation was completely based on a paper cited<br>.
 
+10/12/19
+-
+TO-DO
 
 
 
