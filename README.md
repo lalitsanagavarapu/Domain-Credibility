@@ -97,7 +97,13 @@ Assigned scores to vertices. <br>
 
 10/12/19
 -
-TO-DO
+1.Implemented basic searching of a keyword in security ontolgy.<br>
+2.Crawled contenst of a website to get similar phrases for input keyword.<br>
+3.Implementing BFS DFS to search for most similar URL's in the knowledge graph.<br>
+4.Adding keyword search functionality to webcred<br>
+5.Need to update check_genre function in [Webcred-dev](https://github.com/SIREN-SERC/WEBCred-dev) {currently nothing implemented}.<br>
+6.Working on WebCred-plugin<br>
+
 
 
 
