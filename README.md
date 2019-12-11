@@ -105,6 +105,13 @@ Assigned scores to vertices. <br>
 6.Working on WebCred-plugin<br>
 
 
+11/12/19
+-
+1.Working on Plugin.<br>
+2.Credibility score not being returned in existing code.<br>
+3.Need to add credibility score functionality and integrate with plugin.<br> 
+4.Recaptcha not working,genereated new keys.(put aside for the moment).<br>
+5.Frontend of keyword searching implemented on current webcred server.<br> 
 
 
 
