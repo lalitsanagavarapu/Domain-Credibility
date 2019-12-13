@@ -117,7 +117,7 @@ Assigned scores to vertices. <br>
 
 13/12/19
 -
-####Code pushed.
+####Code pushed
 1.Keyword based url retrieval ranked by cosine similarity between the query word and the list of urls in the security.owl file.<br>
 2.BFS/DFS :Results for both searching algorithms have been stored.<br>
 3.Urls are ranked in descending order and returned as a list with the relevance score for each.<br>
