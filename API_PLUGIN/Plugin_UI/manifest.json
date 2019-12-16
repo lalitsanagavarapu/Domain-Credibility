@@ -1,0 +1,31 @@
+{
+    "name": "WEBCred",
+    "version": "1.0",
+    "description": "Build an Extension to assign WEBCred score to websites",
+    "manifest_version": 2,
+    "incognito": "split",
+    "content_scripts": [
+        {
+            "matches": [
+                "http://127.0.0.1:8000/"
+            ],
+            "js": [
+                "modify.js"
+            ]
+        }
+    ],
+    "icons": {
+        "16": "16icon.png",
+        "48": "48icon.png",
+        "128": "128icon.png"
+    },
+    "browser_action": {
+        "default_popup": "index.html",
+        "default_title": "My First Chrome Extension"
+    },
+    "permissions": [
+        "https://google.com/search/*",
+        "http://127.0.0.1:8000/",
+        "activeTab"
+    ]
+}
