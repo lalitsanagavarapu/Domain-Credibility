@@ -117,7 +117,7 @@ Assigned scores to vertices. <br>
 
 13/12/19
 -
-####Code pushed
+#### Code pushed
 1.Keyword based url retrieval ranked by cosine similarity between the query word and the list of urls in the security.owl file.<br>
 2.BFS/DFS :Results for both searching algorithms have been stored.<br>
 3.Urls are ranked in descending order and returned as a list with the relevance score for each.<br>
@@ -125,6 +125,8 @@ Assigned scores to vertices. <br>
 5.Need to figure out the check_genre function.<br> 
 
 
-
-
+16/12/19
+-
+1.WEBCred assigning null to calculated values. Fixing that.<br>
+2.check_genre function needs an reponse from the ML model.Working on that.<br>
 
