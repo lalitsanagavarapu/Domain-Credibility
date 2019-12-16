@@ -9,7 +9,7 @@ Google_API_KEY='API-Key'<br>
 
 ### Make sure your system has python3.x
 Run app.py from the terminal.<br>
-Open 127.0.0.1:8000<br>
+Open 127.0.0.1:5050<br>
 
 Enter a keyword of your choice<br>
 This search engine is more specific for information security.<br>
