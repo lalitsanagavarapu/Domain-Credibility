@@ -17,3 +17,7 @@ BFS/DFS + cosine similarity for ranking based on credibility.<br>
 
 ##### TO-DO
 Implement inverted index.
+
+
+####Note:
+crawler.py is just a demo to crawl all parent and child urls given a root url.

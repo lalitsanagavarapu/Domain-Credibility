@@ -17,6 +17,7 @@ class mythread (threading.Thread):
 		print ("Starting thread",self.thread_id)
 		find_simi(self.thread_id,self.thread_url)
 		print ("Finished thread",self.thread_id)
+		#print("Done")
 
 def find_simi(thread_id,thread_url):
 	print ("Running thread ",thread_id)
