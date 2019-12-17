@@ -1,0 +1,23 @@
+https://medium.com/@adriensieg/text-similarities-da019229c894
+https://towardsdatascience.com/tf-idf-for-document-ranking-from-scratch-in-python-on-real-world-dataset-796d339a4089
+https://towardsdatascience.com/textrank-for-keyword-extraction-by-python-c0bae21bcec0
+https://www.kaggle.com/jihyeseo/word2vec-gensim-play-look-for-similar-words
+https://398-1349775-gh.circle-artifacts.com/0/documentation/html/generated/gensim.models.word2vec.Word2Vec.html
+https://vene.ro/blog/word-movers-distance-in-python.html
+
+https://towardsdatascience.com/textrank-for-keyword-extraction-by-python-c0bae21bcec0?gi=4c9f41d93e4e
+https://github.com/plofgren/bidirectional-random-walk
+
+https://web.eecs.umich.edu/~mihalcea/papers/mihalcea.emnlp04.pdf
+
+Automatic_Keyword_Extraction_from_Individual_Docum.pdf
+
+https://github.com/yzhangee/AutoSF
+
+https://github.com/airalcorn2/Solr-LTR
+https://github.com/seth127/wikitdm
+https://github.com/RaRe-Technologies/gensim/issues/1322
+https://github.com/marcocor/wikipedia-idf
+https://gist.github.com/maxbellec
+https://github.com/parthasm/Search-Engine-TF-IDF
+Dependency parsing using machine learning techniques
