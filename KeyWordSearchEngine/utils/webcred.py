@@ -116,14 +116,14 @@ class Webcred(object):
             # create percentage dictionary
             number = 13
             # TODO come back and do this properly
-
-            print ()
-            print ()
-            print ()
-            print("no error 1")
-            print ()
-            print ()
-            print ()
+            
+            #print ()
+            #print ()
+            #print ()
+            #print("no error 1")
+            #print ()
+            #print ()
+            #print ()
 
             while True:
                 dim = "dimension" + str(number)
@@ -137,30 +137,24 @@ class Webcred(object):
                         perc = API + "Perc"
                         percentage[dim] = self.request.get(perc)[0]
                     except WebcredError as e:
-                        data[self.request.get(dim)[0]] = e.message
+                        #data[self.request.get(dim)[0]] = e.message
+                        data[self.request.get(dim)[0]] = str(e)
                     except:
                         data[self.request.get(dim)[0]] = "Fatal ERROR"
                 else:
                     break
                 number += 1
 
-            print ()
-            print ()
-            print ()
-            print("no error 2")
-            print ()
-            print ()
-            print ()
-
             data = webcredScore(data, percentage)
 
             data['error'] = None
-            print ("data1error                                    ",data['error'])
+            #print ("data1error                                    ",data['error'])
 
         except WebcredError as e:
-            data['error'] = e.message
-            print ('python error')
-            print()
+            #data['error'] = e.message
+            data['error']=str(e)
+            #print ('python error')
+            #print()
             dump = False
         except Exception:
             # Get current system exception
@@ -198,7 +192,7 @@ class Webcred(object):
             if dump:
                 self.dumpRaw(site)
 
-            data = self.db.getdata('url', data['url'])
+            #data = self.db.getdata('url', data['url'])
 
             # prevent users to know of dump location
             del data['html']

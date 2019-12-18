@@ -105,7 +105,8 @@ class PatternMatching(object):
                 self.isoPattern = self.regexCompile(self.isoList)
                 iso.close()
             except WebcredError as e:
-                raise WebcredError(e.message)
+                #raise WebcredError(e.message)
+                raise WebcredError(str(e))
             except:
                 raise WebcredError('Unable to open {} file'.format(lang_iso))
         else:
@@ -119,7 +120,8 @@ class PatternMatching(object):
                 ads.close()
                 print ('successfull with ads compilation')
             except WebcredError as e:
-                raise WebcredError(e.message)
+                #raise WebcredError(e.message)
+                raise WebcredError(str(e))
             except:
                 raise WebcredError('Unable to open {} file'.format(ads_list))
         else:

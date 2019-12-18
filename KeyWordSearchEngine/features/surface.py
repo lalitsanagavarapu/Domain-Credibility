@@ -288,7 +288,8 @@ def getImgratio(url):
                     )
 
                 # print("Exception type : %s " % ex_type.__name__)
-                if ex_value.message != 'Response 202':
+                #if ex_value.message != 'Response 202':
+                if str(ex_value)!= 'Response 202':
                     logger.warning(ex_value)
                     logger.debug(stack_trace)
 

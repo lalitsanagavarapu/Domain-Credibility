@@ -134,7 +134,8 @@ class MyThread(threading.Thread):
 
             # print("Exception type : %s " % ex_type.__name__)
             try:
-                if not ex_value.message == 'Response 202':
+                if not str(ex_value) == 'Response 202':
+                #if not ex_value.message == 'Response 202':
                     logger.info('{}:{}'.format(ex_type.__name__, ex_value))
                     logger.info(stack_trace)
             except:

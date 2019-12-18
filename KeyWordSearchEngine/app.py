@@ -182,7 +182,7 @@ def start():
 
 @app.route("/")
 def index():
-    print ("Refresh html")
+    print ("render html")
     return render_template("index.html")
 
 
