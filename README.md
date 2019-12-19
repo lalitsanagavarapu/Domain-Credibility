@@ -134,7 +134,8 @@ Assigned scores to vertices. <br>
 - 
 1.ML model<br>
 2.Similarity scores still running(taking time..)<br>
-3.Implemented backend for plugin<br>
+3.Wrote backend for plugin<br>
+4.URL extracter and web crawler fixed<br>
 
 19/12/19
 - 
