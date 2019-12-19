@@ -130,3 +130,13 @@ Assigned scores to vertices. <br>
 1.WEBCred assigning null to calculated values. Fixing that.<br>
 2.check_genre function needs an reponse from the ML model.Working on that.<br>
 
+17/12/19
+- 
+1.ML model<br>
+2.Similarity scores still running(taking time..)<br>
+3.Implemented backend for plugin<br>
+
+19/12/19
+- 
+1.Implementing ML model ,dataset for training getting ready<br>
+2.Similarity score Updated and fixed, CSV files now make sense<br>
