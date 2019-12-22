@@ -6,24 +6,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
 function getResult() {
     var inputVal = document.getElementById("searchInput").value;
     // alert(inputVal);
-    //window.open("http://127.0.0.1:8000/getResult?keyword="+(inputVal),"_blank"); 
-    window.open("http://127.0.0.1:8000") //webcred server 
+    window.open("http://127.0.0.1:3000/getResult?keyword="+(inputVal),"_blank"); 
 }
 function getScoreForURL() {
     var curURL = window.location.href;
     curURL = curURL.toString();
     curURL += "::--::--::";
+    console.log(curURL);
     var req = new XMLHttpRequest();
-         //no such url
-         //output is printed as a json file and to the terminal
     req.open(
         "GET",
-        "http://127.0.0.1:8000/getScore/?url="+curURL, 
+        "http://127.0.0.1:3000/getScore/?url="+curURL,
         true);
     req.onload = function () {
         var reply = req.responseText;
         reply = reply.split("::--::--::")
-        var div = document.getElementById("myScore");//no such element
+        var div = document.getElementById("myScore");
         div.innerHTML = reply[0];
         div.style.display = 'block';
     };

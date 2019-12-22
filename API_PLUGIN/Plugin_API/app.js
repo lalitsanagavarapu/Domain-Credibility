@@ -22,15 +22,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next) {
-  //res.header("Access-Control-Allow-Origin", "127.0.0.1");
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  //res.header("Acces-Contol-Allow-Origin","https://127.0.0.1:3000");//dangerous
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/getScore', scoreRouter);// no such url
-app.use('/getResult',searchRouter); //no such url
+app.use('/getScore', scoreRouter);
+app.use('/getResult',searchRouter);
 // app.get('/getScore', scoreRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

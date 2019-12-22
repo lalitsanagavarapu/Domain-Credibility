@@ -18,7 +18,7 @@ function changeResults() {
     var urlString = urlArray.join("::--::--::");
     var responseString;
     
-    let url = new URL('http://127.0.0.1:8000/getScore/');  //no such url
+    let url = new URL('http://127.0.0.1:3000/getScore/');
     url.searchParams.set('url', urlString);
     
     var xhr = new XMLHttpRequest();
