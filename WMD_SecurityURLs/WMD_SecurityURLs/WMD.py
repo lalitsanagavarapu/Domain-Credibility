@@ -1,5 +1,5 @@
 #import all libraries
-#pyemd is used for Word movers distance 
+#pyemd is used for Word movers distance*(earth movers distance)
 import pyemd
 import gensim
 from gensim import models
@@ -135,8 +135,7 @@ df_normalized=pd.DataFrame()
 ss300_word=[]
 ss300_list=[]
 ss100_word=[]     
-
-
+timestamp=[]
 ss100_list=[]
 
 
@@ -144,12 +143,15 @@ url_list_append = []
 keyword_append=[]
 listname_append=[]
 time_list=[]
+
 #IF NOT DOWNLOADED ,run savemode.py first(in same directory)
 #these lines can be run as a seperate python file
 #make sure to import required gensim libraries
 #w2v_model_300 = api.load("glove-wiki-gigaword-300")
 #w2v_model_100 = api.load("glove-wiki-gigaword-100")
+
 #load pretrained word2vec model(gensim)
+
 w2v_model_300= KeyedVectors.load_word2vec_format("model300.bin", binary=True)
 print("Model 300 loaded")
 w2v_model_100= KeyedVectors.load_word2vec_format("model100.bin", binary=True)
@@ -158,14 +160,17 @@ print("Model 100 loaded")
 counter = 0
 print("Open file")
 
-cur_path = os.path.dirname(__file__)
-new_path = os.path.relpath('../urls/1to100.txt', cur_path)
-curr_dir = os.getcwd() #Gets the current working directory
+#fancy way to set file path
+
+#cur_path = os.path.dirname(__file__)
+#new_path = os.path.relpath('../urls/1to100.txt', cur_path)
+#curr_dir = os.getcwd() #Gets the current working directory
 
 #open url.txt file to read urls.
 #give your choice of file
 #add relative path if in cwd or absolute path
-with open("url5.txt","r") as f:
+
+with open("300urls.txt","r") as f:
 	urls=[url.split() for url in f.readlines()]
 	start_time=time.clock()
 	currlist=urls
@@ -227,10 +232,12 @@ with open("url5.txt","r") as f:
 							url_list_append.append(char)
 							keyword_append.append(word)
 							listname_append.append(currlist)
-
+                           
 							endtime=time.clock()
 							time_taken=endtime-start_time
 							time_list.append(time_taken)
+							days = datetime.now().strftime("%Y_%m_%d=%H:%M:%S")
+							timestamp.append(days)
 							lenlist=lenlist-1
 
 							if lenlist==0:
@@ -253,42 +260,68 @@ print(len(keyword_append))
 print(len(listname_append))
 print(len(time_list))
 
-df_links_url=pd.DataFrame({'URL':url_list_append})
-
-ss_keyword=pd.DataFrame({'word100':ss100_word,'Duration':time_list,'list100':ss100_list,'word300':ss300_word,'list300':ss300_list,'keyword':keyword_append,'List':listname_append})
+df_links_url =pd.DataFrame({'url_Name':url_list_append})  
 
 
-final_df['URL']=df_links_url['URL']
-final_df['TIME']=ss_keyword['Duration']
-final_df['LIST']=ss_keyword['List']
-final_df['KEYWORD']=ss_keyword['keyword']
-final_df['WMD_word100']=ss_keyword['word100']
-final_df['WMD_list100']=ss_keyword['list100']
-final_df['WMD_word300']=ss_keyword['word300']
-final_df['WMD_list300']=ss_keyword['list300']
+simscore_keyword_frame=pd.DataFrame({'no_of_days': timestamp,'keyword':keyword_append,
+    'name_of_list':listname_append,'time_taken':time_list,
+    'word_score_100':ss100_word,'list_score_100':ss100_list,
+    'word_score_300':ss300_word,'list_score_300':ss300_list})
 
 
-#final_df['WMD_word100'] = final_df['WMD_word100'].replace(np.inf, 0)
-#final_df['WMD_list100'] = final_df['WMD_list100'].replace(np.inf, 0)
-#final_df['WMD_word300'] = final_df['WMD_word300'].replace(np.inf, 0)
-#final_df['WMD_list300'] = final_df['WMD_list100'].replace(np.inf, 0)
+
+final_df['time_stamp']=simscore_keyword_frame['no_of_days']
+final_df['url']=df_links_url['url_Name']
+final_df['keyword']=simscore_keyword_frame['keyword']
+final_df['list_name']=simscore_keyword_frame['name_of_list']
+final_df['time_taken']=simscore_keyword_frame['time_taken']
+
+final_df['dis_word_score_100']=simscore_keyword_frame['word_score_100']                                    
+
+final_df['dis_list_score_100']=simscore_keyword_frame['list_score_100']
+
+final_df['dis_word_score_300']=simscore_keyword_frame['word_score_300']
+
+final_df['dis_list_score_300']=simscore_keyword_frame['list_score_300']
 
 
-x_100 = final_df['WMD_word100']
-y_100 = final_df['WMD_list100']
-x_300 = final_df['WMD_word300']
-y_300 = final_df['WMD_list300']
+
+# Infinity WMD =0 
+#float(inf) is only returned for out-of-vocab words)
+#If one of the documents have no words that exist in the vocab, 
+#float(‘inf’) (i.e. infinity) will be returned.
+
+final_df['dis_word_score_100'] = final_df['dis_word_score_100'].replace(np.inf, 0)
+final_df['dis_list_score_100'] = final_df['dis_list_score_100'].replace(np.inf, 0)
+final_df['dis_word_score_300'] = final_df['dis_word_score_300'].replace(np.inf, 0)
+final_df['dis_list_score_300'] = final_df['dis_list_score_300'].replace(np.inf, 0)
 
 
-df_normalized['WMD_word100']=sklearn.preprocessing.minmax_scale(x_100,feature_range=(0, 1), axis=0, copy=True)
-df_normalized['WMD_list100']=sklearn.preprocessing.minmax_scale(y_100,feature_range=(0, 1), axis=0, copy=True)
-df_normalized['WMD_word300']=sklearn.preprocessing.minmax_scale(x_300,feature_range=(0, 1), axis=0, copy=True)
-df_normalized['WMD_list300']=sklearn.preprocessing.minmax_scale(y_300,feature_range=(0, 1), axis=0, copy=True)
+#normalising WMD since it has no upper/lowerbound 
+x_100 = final_df['dis_word_score_100']
+y_100= final_df['dis_list_score_100']
+x_300 = final_df['dis_word_score_300']
+y_300= final_df['dis_list_score_300']
 
-final_df['Norm_word100']=df_normalized['WMD_word100']
-final_df['Norm_list100']=df_normalized['WMD_list100']
-final_df['Norm_word300']=df_normalized['WMD_word300']
-final_df['Norm_list300']=df_normalized['WMD_list300']
 
-final_df.head(2)
-url5_loaded=final_df.to_csv("/home/abhishek/Avi/SimScore/url5_loaded.csv", header=True)
+df_normalized['dis_word_score_100']=sklearn.preprocessing.minmax_scale(x_100, feature_range=(0, 1), axis=0, copy=True)
+df_normalized['dis_list_score_100']=sklearn.preprocessing.minmax_scale(y_100, feature_range=(0, 1), axis=0, copy=True)
+
+df_normalized['dis_word_score_300']=sklearn.preprocessing.minmax_scale(x_300, feature_range=(0, 1), axis=0, copy=True)
+df_normalized['dis_list_score_300']=sklearn.preprocessing.minmax_scale(y_300, feature_range=(0, 1), axis=0, copy=True)
+
+final_df['nor_word_sim_score_100']=df_normalized['dis_word_score_100']
+final_df['nor_list_sim_score_100']=df_normalized['dis_list_score_100']
+final_df['nor_word_sim_score_300']=df_normalized['dis_word_score_300']
+final_df['nor_list_sim_score_300']=df_normalized['dis_list_score_300']
+#returns N rows (2 here) , this is just to check correctness of dataframe being created
+print("Test pandas",final_df.head(2))
+
+_300URLS=final_df.to_csv("/home/abhishek/Avi/SimScore/_300URLS.csv", header=True)
+
+
+#TO-DO
+
+#the following code can be spedup if we identify a pattern in similairty scores 
+#it may be possible that we might only need to check list similarity with the url 
+#can we use multithreading?

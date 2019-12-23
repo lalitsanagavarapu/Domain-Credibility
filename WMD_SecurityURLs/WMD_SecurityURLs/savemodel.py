@@ -18,12 +18,12 @@ import gensim.downloader as api
 
 
 
-w2v_model_300 = api.load("glove-wiki-gigaword-300")
-model300=w2v_model_300
+model300= api.load("glove-wiki-gigaword-300")
+#model300=w2v_model_300
 model300.save_word2vec_format('model300.bin', binary=True)
 print("model 300 tained")
-w2v_model_100 = api.load("glove-wiki-gigaword-100")
-model100=w2v_model_100
+model100 = api.load("glove-wiki-gigaword-100")
+#model100=w2v_model_100
 model100.save_word2vec_format('model100.bin', binary=True)
 print("model 100 trained")
 #filename = 'w2v_model_300'
