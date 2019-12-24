@@ -14,6 +14,7 @@ from sklearn.metrics import classification_report
 import pickle
 from sklearn.ensemble import BaggingClassifier
 from sklearn.model_selection import KFold
+from sklearn.model_selection import cross_val_score,StratifiedKFold
 import chart_studio.plotly as py
 import plotly.graph_objs as go
 from sklearn.feature_selection import SelectKBest, f_classif, mutual_info_classif, chi2, SelectPercentile
@@ -21,17 +22,14 @@ import matplotlib.pyplot as plt
 
 folds = 5
 kf = KFold(n_splits=folds)
-
+#try StratifiedKfold(default cv))
+#kf=StratifiedKFold(n_splits=5)
 
 def xfrange(start, stop, step):
     i = 0
     while start + i * step < stop:
         yield start + i * step
         i += 1
-
-
-# In[3]:
-
 
 def getclasscount(Y_train):
     classes = list(set(Y_train))
@@ -53,26 +51,54 @@ def Getclasscount(Y_train):
         class_counts[i] += 1
     return class_counts
 
-
-
-# In[5]:
-
 #the algorithms should have predicted a sample as ci because the actual class is ci, 
 #but the algorithm came out with cj. In this case of mislabelling the element cm[i,j] 
 #will be incremented by one, when the confusion matrix is constructed.
 
+
+#The f1-score gives you the harmonic mean of precision and recall. 
+#The scores corresponding to every class will tell you the accuracy of the 
+#classifier in classifying the data points in that particular class compared to 
+#all other classes.
+#The support is the number of samples of the true response that lie in that class.
+#true/false positive/negative
+#Accuracy = TP+TN/TP+FP+FN+TN
+#Precision = TP/TP+FP
+#F1 Score = 2*(Recall * Precision) / (Recall + Precision)
+#Recall = TP/TP+FN
+
+
+#Why kappa classifier --
+
+ #@Not only can this kappa statistic shed light into how the classifier itself performed
+ # the kappa statistic for one model is directly comparable to the kappa statistic 
+ #for any other model used for the same classification task.
+
+#TO-NOTE
+#https://stats.stackexchange.com/questions/82162/cohens-kappa-in-plain-english
+#Kappa is an important measure on classifier performance, 
+#especially on imbalanced data set.
+
+
 def stats(y_test, y_pred):
+    #100% kappa means that the classifier is in total agreement with a random classifier
+    #Cohen's kappa works for two raters
+    #The Kappa statistic (or value) is a metric that compares 
+    #an Observed Accuracy with an Expected Accuracy (random chance). 
+    #The kappa statistic is used not only to evaluate a single classifier, 
+    #but also to evaluate classifiers amongst themselves.
+
+    #In supervised machine learning, one "rater" reflects ground truth (the actual values 
+    #of each instance to be classified), obtained from labeled data, and the 
+    #other "rater" is the machine learning classifier used to perform the classification. 
+    #Kappa = (observed accuracy - expected accuracy)/(1 - expected accuracy)
     
     report1 = kappa_score(y_test, y_pred)   
-
+    print("KAPPA SCORE",report1)
     report2 = classification_report(y_test, y_pred)
     print ('\n clasification report:\n', report2)
     print ('\n confussion matrix:\n',confusion_matrix(y_test, y_pred))
     return report1,report2
-
-
-# In[6]:
-
 
 # biased learning, most of thr predictions were articles, 
 # as it has the maximum count in training set
@@ -95,15 +121,13 @@ from sklearn.ensemble import GradientBoostingClassifier
 gbdt = GradientBoostingClassifier(n_estimators=100,max_depth=3,verbose=0)
 
 
-# In[7]:
-
-
 import csv
 X = []
 
 
 # read data
 # with open('webcred_features_expanded.csv','rb') as f:
+#dont read as rb in python3.x
 with open('../data/dump/health/webcred_features_expanded.csv','rt') as f:
     data = csv.reader(f, delimiter=',')
     for line in data:
@@ -111,6 +135,8 @@ with open('../data/dump/health/webcred_features_expanded.csv','rt') as f:
 
         
 tag = X[0].index('genre')
+#see the genre column in the csv file
+#0=public potrayal ,1=article,2=discussion,3=shop
 
 # Y = [i[tag] for i in X]
 # Y = Y[1:]
@@ -118,8 +144,8 @@ tag = X[0].index('genre')
 
 
 features = X[0]
-del features[tag]
 #decoupling of target variable
+del features[tag]
 
 
 print ('Features Count=' ,len(features))
@@ -135,13 +161,18 @@ link_collection = 0
 
 # class_name = ['article', 'help', 'shop', 'public_portrayals_companies_and_institutions', 'discussion', 'link_collection', 'downloads', 'private_portrayal_personal_homepage', 'other']
 class_name = ['public_portrayals_companies_and_institutions', 'article', 'link_collection', 'discussion', 'shop']
+
 count = {i:0 for i in class_name}
+
+#count below
+#{'public_portrayals_companies_and_institutions': 0, 'discussion': 0, 'link_collection': 0, 'article': 0, 'shop': 0}
 
 class_count_threshold = 20000
 
 for index, row in enumerate(X):
 
     genre = row[tag]
+    #print("Genre is ",genre)
 
     # removing broken_links and other
     if genre in [
@@ -154,14 +185,16 @@ for index, row in enumerate(X):
     
     temp = []    
     for index, item in enumerate(row):
+        #print("Index",index,"item",item)
         if index==tag:
             
             try:
+                #increase frequency of that genre
                 count[class_name[int(item)]]+=1
 #                 count[item]+=1
 #                 print item
             except:
-                print( item)
+                #print("Item is",item)
                 break
 
             if count[class_name[int(item)]]>class_count_threshold:
@@ -196,6 +229,7 @@ for index, row in enumerate(X):
         X_2.append(temp)
     
 X = X_2
+#print(X,np.asarray(X))
 
 X = np.asarray(X)
 Y = np.asarray(Y)
@@ -212,18 +246,12 @@ print('Sample size=' ,len(Y))
 # print 'Y_test >>' + str(Y_test.shape) + ' Test data labels'  
 
 
-# In[8]:
-
-
 print ('Training counts')
 getclasscount(Y)
 # Getclasscount(Y)
 # print 
 # print 'Testing counts'
 # print getclasscount(Y_test)
-
-
-# In[9]:
 
 
 # Remove features which have same value across all samples
@@ -242,19 +270,11 @@ print(str(X_var.shape) + ' Training data dimension')
 # print str(X_test_var.shape) + ' Test data dimension'
 # print str(Y_test.shape) + ' Test data labels'  
 
-
-# In[10]:
-
-
 # name of selected features based on Variance
 #Get a mask, or integer index, of the features selected
 selected_features = sel.get_support(indices=True)
 print (selected_features)
 # print [features[feats] for feats in selected_features]
-
-
-# In[11]:
-
 
 # ANNOVA scores for each feature
 
@@ -268,10 +288,6 @@ print (annova.shape)
 # print skb.get_support(indices=True)
 # print annova
 
-
-# In[11]:
-
-
 plt.plot(annova)
 plt.grid(True)
 plt.ylabel('Annova Score')
@@ -279,10 +295,7 @@ plt.xlabel("Feature's Index")
 plt.show()
 
 
-# In[12]:
-
-
-# Generate Mutual Information gain
+#Mutual Information gain
 
 # mkb = SelectKBest(mutual_info_classif,k=200)
 # X_mkb = mkb.fit_transform(X_train,Y_train)
@@ -295,19 +308,11 @@ print (mig.shape)
 
 # features[selected_features[np.argmax(mig)]]
 
-
-# In[13]:
-
-
 plt.plot(mig)
 plt.grid(True)
 plt.ylabel('MIG Score')
 plt.xlabel("Feature's Index")
 plt.show()
-
-
-# In[13]:
-
 
 # Select features with ANNOVA scores above 5
 def build_skb(score):
@@ -338,17 +343,15 @@ def build_mkb(score):
     
     return X_mkb
 
-
-# In[14]:
-
-
-# under sampling
+#UNDER SAMPLING 
 from imblearn.under_sampling import RandomUnderSampler, ClusterCentroids
 
 # cluster sample
+#clusters of majority class and replace that cluster with centroid of that cluster. 
 ccsampling = ClusterCentroids(random_state=45,sampling_strategy='all')
 
 # random sample 
+#can lead to loss of potential information 
 russampling = RandomUnderSampler(random_state=0)
 
 # print 'feature selection- none'
@@ -370,13 +373,16 @@ russampling = RandomUnderSampler(random_state=0)
 
 # getclasscount(Y_train_cc)
 
-# more likely ccsampling is better over russampling
+# more likely ccsampling is better than russampling
 
+#OVER SAMPLING 
+#Why smote--
+#Random oversampling is highly prone to Overfitting
 
-# In[17]:
-
-
-# over sampling
+#Feeding imbalanced data to your classifier can make it biased
+#in favor of the majority class, simply because it did not have 
+#enough data to learn about the minority.
+#Hence we use SMOTE to generate synthetic data points
 from imblearn.over_sampling import SMOTE
 smsampling = SMOTE(random_state=2,k_neighbors=1)
 
@@ -392,10 +398,6 @@ smsampling = SMOTE(random_state=2,k_neighbors=1)
 
 # getclasscount(Y_train_ros)
 
-
-# In[15]:
-
-
 features_reduced_data = {
 #     'unreduced':X 
 #     'variance':X_var, 
@@ -403,22 +405,20 @@ features_reduced_data = {
 #     'Mutual Info':'build_mkb'
 }
 
-
-# In[18]:
-
-
 sampling_clusters = {
 #     'cluster sampling': ccsampling, 
-    'over sampling': smsampling
+      'over sampling': smsampling
 }
 
 
-# In[22]:
-
+#Why GBDT
+#-----
+#Ensemble methods are found to good for handling imbalance data. 
+#Random forest is also found to be good at handling imbalance data.
 
 training_models = {
-#     'svm':svm,
-    # 'LogisticRegression':lr, 
+     #'svm':svm,
+     #'LogisticRegression':lr, 
      #'neural networks':mlp,
     'GradientBoostingClassifier':gbdt
 }
@@ -437,6 +437,7 @@ def train_clf(x,y, clf, model_name):
         x, y = sample_func.fit_sample(x,y)
         
         print ("Class count",getclasscount(y))
+        #just to check other outputs we return here
         #return
                         
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=42)
@@ -483,15 +484,16 @@ def train_clf(x,y, clf, model_name):
             if test>=0.8:
                 print("Test is greater than 0.8")
                 y_pred = clf.predict(x_test)
-                print("Y pred value",y_pred)
+                #print("Y pred value",y_pred)
 
                 kappa_score, classification_report = stats(y_test, y_pred)
     #             getclasscount(y_test)
-            #return test
+                #return test
+                return testing/folds*100.0
         
 
 
-        print ('fIRST--------------------------------------------------------------')
+        print ('Returning testing/100*folds--------------------------------------------------------------')
         #return testing/folds*100.0
         #if testing/10>=0.8:
 #             print sample_name
@@ -510,10 +512,6 @@ def train_clf(x,y, clf, model_name):
 #         pickle.dump(kappa_score, f)
 #         pickle.dump(classification_report, f)
 
-
-# In[25]:
-
-
 data_graph = []
 
 for model_name, model_func in training_models.items():
@@ -528,11 +526,12 @@ for model_name, model_func in training_models.items():
 
         if isinstance(data,str):
             # perform k-fold training and testing modelling
+            #generate float values between x,y in steps of z=0.5
             for i in xfrange(7.5,7.6,0.5):
 #             for i in xfrange(0.02,0.16,0.02):
-#                 print i
+#                 print(i)
                 x = eval(data)(i)
-                print("Training classifier",train_clf(x, Y, model_func, model_name))
+                print("Training acc returned",train_clf(x, Y, model_func, model_name))
                 testing.append(train_clf(x, Y, model_func, model_name))
                 feature_count.append(x.shape[1])
 
@@ -556,7 +555,8 @@ layout = dict(title = 'Testing Accuracy across Models for various {0} Filtering'
               yaxis = dict(title = 'Testing Accuracy (%)'),
               )
 
-fig = dict(data=data_graph, layout=layout)    
+fig = dict(data=data_graph, layout=layout)
+#use plotly online    
 py.sign_in('Avi-141', '0vBYQs5NNzyATMxW5m0P')
 py.iplot(fig, filename='line-mode')
 
