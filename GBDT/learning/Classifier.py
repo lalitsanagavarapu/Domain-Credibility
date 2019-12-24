@@ -386,6 +386,18 @@ russampling = RandomUnderSampler(random_state=0)
 from imblearn.over_sampling import SMOTE
 smsampling = SMOTE(random_state=2,k_neighbors=1)
 
+#Why smote is a good option for our data---
+#n samples (a.k.a. data points, instances)
+# and p features (a.k.a. attributes, independent variables, explanatory variables).
+#high dimensionsal means a data set whenever p>n, no matter what p is or n is. 
+#f you have 3 data points, and 5 features each, it’s a high dimensional data.
+# On the other hand, even if you have 500k features, once you have 1M samples, it’s still low dimensional.
+
+
+ #https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-106
+ #on high-dimensional data SMOTE does not change the class-specific mean values 
+ #while it decreases the data variability and it introduces correlation between samples
+
 # print "initial dimension of matrix"
 # print str(X_mkb.shape) + ' Training data dimension after feature selection'
 # print str(Y_train.shape) + ' Training labels'
