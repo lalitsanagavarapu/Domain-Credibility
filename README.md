@@ -18,7 +18,7 @@ URLlib<br>
 
 
 
-#### Ideas ::
+#### Work::
 28/11/19
 -------
 1.Siamese Net (pairwise comparision, how to design triplet loss) <br>
