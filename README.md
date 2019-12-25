@@ -141,3 +141,21 @@ Assigned scores to vertices. <br>
 - 
 1.Implementing ML model ,dataset for training getting ready<br>
 2.Similarity score Updated and fixed, CSV files now make sense<br>
+
+20/12/19
+- 
+1.WMD.py was producing redundant results,issue fixed.Code has been optimized and made more efficient<br>
+2.Need to handle exceptions for URL's which sent back error status codes<br>
+3.Plugin is now working(please run it on google chrome due to CORS error in firefox)<br>
+
+23/12/19
+-
+1.Plugin needs to be linked to original Webcred score script.<br>
+2.Generated CSV files for 700 URL's in batches, it takes about 1 hour for 150 urls (which can be sped up since multiple tasks were running in the machine)<br>
+3.Complexity of WMD.py has been reduced by O(len(keywordlist))<br>
+
+24/12/19
+-
+1.TF-IDF can be smoothed<br>.
+2.Apache SOLR<br> (look up)<br>
+
