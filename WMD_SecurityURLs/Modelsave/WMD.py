@@ -170,7 +170,7 @@ print("Open file")
 #give your choice of file
 #add relative path if in cwd or absolute path
 
-with open("_150_C1_urls.txt","r") as f:
+with open("300urls.txt","r") as f:
 	urls=[url.split() for url in f.readlines()]
 	start_time=time.clock()
 	currlist=urls
@@ -317,7 +317,7 @@ final_df['nor_list_sim_score_300']=df_normalized['dis_list_score_300']
 #returns N rows (2 here) , this is just to check correctness of dataframe being created
 print("Test pandas",final_df.head(2))
 
-_150_C1_urls=final_df.to_csv("/home/abhishek/Avi/SimScore/CSV/_150_C1_urls.csv", header=True)
+_300URLS=final_df.to_csv("/home/abhishek/Avi/SimScore/_300URLS.csv", header=True)
 
 
 #TO-DO
