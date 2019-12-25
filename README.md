@@ -1,4 +1,4 @@
-# WebCred-Api
+# Domain credibility
 Currently adopted method is the Gradient boosted decision tree.(XGBoost/LightGBM)  
 This works well with tabular datasets.<br>
 Features were orthogonal.<br>
