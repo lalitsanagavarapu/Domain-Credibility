@@ -159,3 +159,7 @@ Assigned scores to vertices. <br>
 1.TF-IDF can be smoothed<br>.
 2.Apache SOLR<br> (look up)<br>
 
+25/12/19
+-
+1.WMD.py made more efficient, only parses relevant webpage content,excludes blacklist.(style,headers like html tags)<br>
+2.GBDT to be run using our generated dataset.<br>
