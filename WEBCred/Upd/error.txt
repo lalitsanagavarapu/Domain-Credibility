@@ -1,0 +1,16 @@
+ File "app.py", line 8, in <module>
+    from utils.webcred import Webcred
+  File "/home/avi/Desktop/IITH-WebCred/WEBCred/utils/webcred.py", line 2, in <module>
+    from features import surface
+  File "/home/avi/Desktop/IITH-WebCred/WEBCred/features/surface.py", line 9, in <module>
+    from utils.urls import Urlattributes
+  File "/home/avi/Desktop/IITH-WebCred/WEBCred/utils/urls.py", line 337, in <module>
+    class Urlattributes(object):
+  File "/home/avi/Desktop/IITH-WebCred/WEBCred/utils/urls.py", line 385, in Urlattributes
+    db = Database(Features)
+  File "/home/avi/Desktop/IITH-WebCred/WEBCred/utils/essentials.py", line 163, in __init__
+    if not engine.dialect.has_table(engine, database.__tablename__):
+
+
+commented out filename=logging.log 
+then running app.py produces this error 

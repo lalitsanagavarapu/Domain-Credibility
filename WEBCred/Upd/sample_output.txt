@@ -1,0 +1,12 @@
+successfull with ads compilation
+end patternMatching
+normalizing ('misspelled', {0: 1, 'else': 0})
+normalizing ('responsive', {'true': 1, 'false': 0, '0': 0, '1': 1})
+normalizing ('langcount', {1: 0, 'else': 1})
+normalizing ('domain', {'gov': 1, 'org': 0, 'edu': 1, 'com': 0, 'net': 0, 'else': -1})
+normalizing ('lastmod', {93: 1, 'else': 0})
+ * Serving Flask app "utils.essentials" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off

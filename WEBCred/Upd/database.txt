@@ -1,0 +1,4 @@
+id |                                        url                                        |               redirected                | genre | webcred_score | error | html | text | assess_time | lastmod | lastmodnorm | domain | domainnorm | inlinks | inlinksnorm | outlinks | outlinksnorm | hyperlinks | hyperlinksnorm | imgratio | imgrationorm | brokenlinks | brokenlinksnorm | cookie | cookienorm | langcount | langcountnorm | misspelled | misspellednorm | responsive | responsivenorm | ads | adsnorm | pageloadtime | pageloadtimenorm | site | sitenorm 
+
+
+  2,https://securityscorecard.com/blog/top-10-information-security-websites-to-follow , https://securityscorecard.com/resources,0.7(webcred score) 

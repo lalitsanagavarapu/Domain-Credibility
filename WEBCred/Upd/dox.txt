@@ -1,0 +1,11 @@
+dict_items is outdated in python2 
+use list for accessing by index 
+
+
+types module is outdated in python3(just an alias for int,float etc)
+
+use NumberTypes=(int,float,complex) direectly. 
+
+changes made to bring it up to python3 
+
+

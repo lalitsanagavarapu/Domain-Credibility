@@ -1,0 +1,445 @@
+{% extends "layout.html" %}
+{% block body %}
+	<form action="start" method=get class=add-entry onsubmit="return validateForm()">
+	      <dl>
+					<dd>URL:<input type=url name=site size="70" placeholder="Input Url">
+
+					<p>Select Applicable Genre:</p>
+
+					<!-- select genre id	<tab -->
+					<table >
+
+						<tr>
+
+							<td>
+								<div class="tooltip">
+									<input type="radio" onclick="checkGenre()"name="genre"
+									 id="Shop" value="Shop" class="tooltip"> Shop
+									 <span class="tooltiptext">Product Informaation, shopping</span>
+							 </div>
+							</td>
+
+							<td>
+								<div class="tooltip">
+									<input type="radio" onclick="checkGenre()"name="genre"
+									id="Help/Discussion" value="Help/Discussion" > Help
+									 <span class="tooltiptext">QA Forum, FAQs</span>
+							 </div>
+
+							</td>
+
+							<td>
+								<div class="tooltip">
+									<input type="radio" onclick="checkGenre()"name="genre"
+									id="Portrayl-Individual" value="Portrayl-Individual" > Portrayl-Individual
+									 <span class="tooltiptext">Companies,Universities, Government, Brochures</span>
+							 </div>
+							</td>
+
+							<td>
+								<div class="tooltip">
+									<input type="radio" onclick="checkGenre()"name="genre"
+									id="Articles" value="Articles" > Articles
+									 <span class="tooltiptext">Research, Newspaper, Reports</span>
+							 </div>
+							</td>
+
+							<td>
+
+								<input type="radio" onclick="checkGenre()"name="genre"
+								 id="other-genre" value="other" >
+								 <input type='text' placeholder="Other Genre"
+									 name="other-genre"/>
+							</td>
+
+						</tr>
+
+					</table>
+
+					<hr>
+					<div id="tool" style="display:none">
+
+						<!-- select dimension -->
+						<table cellpadding="10px" id="dimensions">
+
+							<tr>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="ads" id="ads" value="true" >
+										Advertisement
+										 <!-- <span class="tooltiptext">Banner advertisements reduce
+credibility of a webpage’s content especially when the
+advertising is unexpected.</span> -->
+								 </div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="adsPerc" id="adsPerc" value="0">
+								</td>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="brokenlinks" id="brokenlinks"
+										value="true" > Broken Links
+										 <!-- <span class="tooltiptext">Linking webpages through hyperlinks
+is a fundamental feature to reuse existing content and
+cite other source of information. If the hyperlink is
+broken or not accessible (HTTP status code in 400
+and 500) it impacts the credibility of authority.</span> -->
+								 </div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="brokenlinksPerc" id="brokenlinksPerc" value="0">
+								</td>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="langcount" id="langcount"
+										value="true" > Internationalization
+										 <!-- <span class="tooltiptext">With increasing spread of
+internet, a multilingual website opens an opportunity to wider range of
+audience across the globe.</span> -->
+								 </div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="langcountPerc" id="langcountPerc" value="0">
+								</td>
+
+								<!-- <td>
+									<input type="checkbox" name="genre" id="genre" value="true" > Genre
+								</td> -->
+
+								<!-- <td>
+									<input type="checkbox" name="cohesion" id="cohesion" value="true" > Cohesion
+								</td> -->
+
+								<!-- <td>
+									<input type="checkbox" name="domain_similarity"
+									id="domain_similarity" value="true" > Domain Similarity
+								</td> -->
+
+						  </tr>
+
+							<tr>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="domain" id="domain" value="true" > Internet Domain
+ 									 	<!-- <span class="tooltiptext">The gTLD
+of a webpage suggest that the page belongs to a set of
+trusted webpages. Our study ascertains that some
+domain types are more trustworthy as compared to
+others, e.g, a .gov domain type suggests that its
+content is approved by a governmental institution
+while a .com domain type suggests it belong to a
+commercial organization.</span> -->
+								 </div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="domainPerc" id="domainPerc" value="0">
+								</td>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="inlinks" id="inlinks" value="true" > Inlinks
+										 <!-- <span class="tooltiptext">The number of out-of-domain links
+pointing to a webpage has been the most preferred
+ranking method of the website since the pageRank
+algorithm</span> -->
+								 	</div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="inlinksPerc" id="inlinksPerc" value="0">
+								</td>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="lastmod" id="lastmod" value="true" > Modified Date Time
+									 	<!-- <span class="tooltiptext">Many webpages do not list the
+last date and time they updated, modified, or changed.</span> -->
+	 							 	</div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="lastmodPerc" id="lastmodPerc" value="0">
+								</td>
+
+							</tr>
+
+							<tr>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="hyperlinks" id="hyperlinks" value="true" > Real World Presence
+ 									 	<!-- <span class="tooltiptext">The realworld presence
+(Contact address, Telephone number, Email, Social
+Media presence) increases the credibility.</span> -->
+								 </div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="hyperlinksPerc" id="hyperlinksPerc" value="0">
+								</td>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="outlinks" id="outlinks" value="true" >  Outlinks
+										<!-- <span class="tooltiptext">On the otherhand, too many outlinks
+(out-of-domain) on a page indicates that the site
+doesn’t have it’s own actual content and the users
+have to assess other web pages for credible
+information.</span> -->
+								 </div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="outlinksPerc" id="outlinksPerc" value="0">
+								</td>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="misspelled" id="misspelled" value="true" > Misspell
+										 <!-- <span class="tooltiptext">Spell errors in a webpage is an indicator
+on lack of professionalism leading to a negative impact
+on credibility.</span> -->
+								 </div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="misspelledPerc" id="misspelledPerc" value="0">
+								</td>
+
+							</tr>
+
+							<tr>
+
+								<td>
+									<div class="tooltip">
+ 										<input type="checkbox" name="imgratio" id="imgratio" value="true" > Text to Image Ratio
+										 <!-- <span class="tooltiptext">The ratio of text (post HTML
+tag removal) to the overall size of the webpage
+indicates the ability to build knowledge base.
+However, exceptions in some cases like, sites that
+belong to shopping contain images predominantly
+unlike other</span> -->
+								 </div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="imgratioPerc" id="imgratioPerc" value="0">
+								</td>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="responsive" id="responsive" value="true" > Responsive Design
+ 									 	<!-- <span class="tooltiptext">Responsive web design is the
+automatic alteration of a webpage’s layout based on
+the screen resolution of device being used to view it.
+With mobile internet growing faster than desktop
+based internet usage, the necessity of web site to be
+navigable and functional over a range of devices is
+high.</span> -->
+								 </div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="responsivePerc" id="responsivePerc" value="0">
+								</td>
+
+								<td>
+									<div class="tooltip">
+										<input type="checkbox" name="pageloadtime" id="pageloadtime" value="true" > Page Load Time
+									 	<!-- <span class="tooltiptext">With
+improved
+internet
+bandwidth, a recent survey states that users
+expectation on pageload is around 2 seconds. The
+pageload is an aesthetic and surface feature for
+improving credibility of a webpage.</span> -->
+									</div>
+									<br>
+									<input type="number" step="any" min="0" max="100" \
+										name="pageloadtimePerc" id="pageloadtimePerc" value="0">
+								</td>
+
+							</tr>
+
+						</table>
+
+						<table>
+							<tr>
+
+								<td>
+									<!-- Add more dimensions -->
+									<button type="button" onclick="addRow()">Add more
+										Features</button>
+								</td>
+
+								<td>
+									<!-- Remove last row/dimensions -->
+									<button type="button" id="removerow" onclick="removeRow()"
+										style="display:none">Remove Last Row</button>
+								</td>
+
+							</tr>
+
+						</table>
+
+						<hr>
+						<!-- google Captcha -->
+						<div class="g-recaptcha" data-sitekey=
+							"6LcsiCoUAAAAAM4y5pKsPEGfBasVYdkB0PvgpllL"></div>
+
+						<input type=submit value="Assess Credibility">
+
+					</div>
+	      </dl>
+	</form>
+
+	<script>
+	  function addRow() {
+				document.getElementById("removerow").style.display = "inline"
+				var x = document.getElementById('dimensions');
+			  var new_row = x.rows[1].cloneNode(true);
+				//FIXME +5 is caluclated number as total dimensions are 12
+				//and len==8
+				//HACK if +5 number is changed, then change in urls.py, validateForm()
+				// , removeRow()
+			  var len = x.rows.length + 9;
+				dimension = "dimension" + len;
+				api = "api" + len;
+				console.log(dimension, api);
+
+			  new_row.cells[0].innerHTML = '<input type="text" placeholder=\
+				"Name of new Feature" name="'+ dimension + '" id="'+dimension+'" required/>';
+
+			  new_row.cells[1].innerHTML = '<input type="url" placeholder=\
+				"API for Feature" name="'+ api + '" id="'+api+'"required />';
+
+				// <input type="number" step="any" min="0" max="100" \
+				// 	name="imgratioPerc" id="imgratioPerc" value="0">
+			  new_row.cells[2].innerHTML = '<input type="number"  placeholder=\
+				"Weightage for dimension" step="any" min="0" max="100" name="'+ api +
+				'Perc" id="'+api+'Perc" value="0"/>';
+
+			  x.appendChild(new_row);
+	  }
+
+		function removeRow(){
+			var x = document.getElementById('dimensions');
+			rows = x.rows.length;
+			if (rows>4){
+				x.deleteRow(rows-1);
+				if(rows==5){
+					document.getElementById("removerow").style.display = "none";
+				}
+			}
+			else{
+				alert("No row  to remove");
+			}
+
+		}
+
+		function checkGenre(){
+			document.getElementById("tool").style.display = ""
+			var genre = {}
+			genre["Shop"] = {
+				'inlinks':"9.09", 'brokenlinks':"9.09", 'domain':"9.09",
+				'langcount':"9.09", 'lastmod':"9.09", 'misspelled':"9.09",
+				'outlinks':"9.09", 'pageloadtime':"9.09", 'hyperlinks':"9.09",
+				'responsive':"9.09", 'imgratio':"9.09"
+			};
+			genre["Help/Discussion"] = {
+				'ads':"14.285", 'inlinks':"14.285", 'domain':"14.285",'langcount':"14.285",
+				'lastmod':"14.285",'hyperlinks':"14.285", 'responsive':"14.285",
+			};
+			genre["Portrayl-Individual"] = {
+				'ads':"9.09", 'inlinks':"9.09", 'brokenlinks':"9.09", 'domain':"9.09",
+				'lastmod':"9.09", 'misspelled':"9.09",
+				'outlinks':"9.09", 'pageloadtime':"9.09", 'hyperlinks':"9.09",
+				'responsive':"9.09", 'imgratio':"9.09"
+			};
+			genre["Articles"] = {
+				'ads':"8.33", 'inlinks':"8.33", 'brokenlinks':"8.33", 'domain':"8.33",
+				'langcount':"8.33", 'lastmod':"8.33", 'misspelled':"8.33",
+				'outlinks':"8.33", 'pageloadtime':"8.33", 'hyperlinks':"8.33",
+				'responsive':"8.33", 'imgratio':"8.33"
+			};
+			genre["other-genre"] = {
+				'ads':"8.33", 'inlinks':"8.33", 'brokenlinks':"8.33", 'domain':"8.33",
+				'langcount':"8.33", 'lastmod':"8.33", 'misspelled':"8.33",
+				'outlinks':"8.33", 'pageloadtime':"8.33", 'hyperlinks':"8.33",
+				'responsive':"8.33", 'imgratio':"8.33"
+			};
+			// REVIEW negative number are not showing
+			// genre["other-genre"] = {
+			// 	'ads':"−24.0140441", 'inlinks':"−72.8650503", 'brokenlinks':"49.6275523", 'domain':"24.8023672",
+			// 	'langcount':"0.8516245", 'lastmod':"50.3201873", 'misspelled':"28.9997645",
+			// 	'outlinks':"47.4079554", 'pageloadtime':"−2.2339502", 'hyperlinks':"48.0862371",
+			// 	'responsive':"−0.6856424", 'imgratio':"−0.6922669"
+			// };
+
+			for(var key in genre){
+				if (document.getElementById(key).checked == true){
+					// debugger;
+					var dimension = genre['other-genre'];
+
+					// reset check and Weightage value
+					for(var param in dimension){
+						document.getElementById(param).checked = false;
+						perc = param+"Perc"
+						document.getElementById(perc).value = '0';
+					}
+					var dimension = genre[key];
+					// console.log("checking genre", key, dimension);
+					for(var param in dimension){
+						document.getElementById(param).checked = true;
+						perc = param+"Perc"
+						document.getElementById(perc).value = dimension[param];
+					}
+				}
+			}
+
+		}
+
+		function validateForm(){
+			var dimensions = [
+						'ads', 'inlinks', 'brokenlinks', 'domain',
+						'langcount', 'lastmod', 'misspelled',
+						'outlinks', 'pageloadtime', 'hyperlinks',
+						'responsive', 'imgratio'
+					];
+
+			var percentage = 0;
+
+			// summation of Weightage value of dimensions
+			for (var j=0; j<dimensions.length; j++){
+				param = dimensions[j]
+				if(document.getElementById(param).checked==true){
+					perc = param + "Perc";
+					percentage += parseFloat(document.getElementById(perc).value);
+				}
+			}
+
+			// summation of Weightage value of added dimensions
+			// HACK refer to function addRow()
+			number = 13
+			while(true){
+				dimension = "dimension" + number
+				api = "api" + number
+				if(document.getElementById(dimension) &&
+						document.getElementById(api)){
+							perc = api + "Perc"
+							percentage += parseFloat(document.getElementById(perc).value);
+							number += 1
+						}
+				else{
+					break;
+				}
+			}
+
+			console.log(percentage)
+			// check sum of Weightage
+			if(percentage<99.9 || percentage>100.1){
+				alert("Sum of Weightage should be 100");
+				return false;
+			}
+		}
+
+	</script>
+
+{% endblock %}

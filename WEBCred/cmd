@@ -1,0 +1,17 @@
+postgres=# create database __WebCred__
+postgres-# psql postres
+postgres-# \password
+Enter new password: 
+Enter it again: 
+postgres-# 
+
+ curl ifconfig.co
+
+ /etc/postgresql/10/main
+
+
+ psql 
+ avi
+
+ postgres (password for postgres role)
+ 
