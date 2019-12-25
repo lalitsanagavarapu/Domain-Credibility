@@ -1,5 +1,6 @@
 #import all libraries
 #pyemd is used for Word movers distance*(earth movers distance)
+#from parsetags import parse_text
 import pyemd
 import gensim
 from gensim import models
@@ -113,7 +114,9 @@ Lists =  [Network_s, Application_s, Access_s,Operations_Control_s,Management_s,E
 def extractlst(lst): 
     return list(map(lambda el:[el], lst))
 
-#nlp - cleantext 
+#cleantext and get HTML content
+#returns unecessary tags , but we only need p tags/titles. 
+#not called anymore 
 def cleanText(text):
     text = BeautifulSoup(text, "lxml").text
     text = re.sub(r'\|\|\|', r' ', text)
@@ -122,6 +125,46 @@ def cleanText(text):
     text = re.sub(r'\s+', ' ', text)
     text = text.lower()
     return text
+
+#Modifed parser which only parses necessary content 
+#like paragraphs,ahrefs,title of the url 
+#blacklist consists of uncessery data which was being parsed in cleanText function
+def parser(url):
+	output=''
+	blacklist = [
+	'[document]',
+	'noscript',
+	'header',
+	'html',
+	'meta',
+	'head', 
+	'input',
+	'script',
+	'style'
+	# there may be more elements you don't want, such as "style", etc.
+	]
+	whitelist = [
+  	'p'
+  	'title'
+  	]
+  	#url=URL
+	res=requests.get(url)
+	html_page=res.content
+	soup=BeautifulSoup(html_page,'lxml')
+	req_text=soup.find_all(text=True)
+	#req_text=req_text.lower()
+	#text=req_text
+	#text = re.sub(r'\|\|\|', r' ', text)
+	#text = re.sub(r'http\S+', r'<URL>', text)
+	#text= re.sub('[^a-zA-Z]', ' ', text )
+	#text = re.sub(r'\s+', ' ', text)
+	#text = text.lower()
+
+	for t in req_text:
+		if t.parent.name not in blacklist or t.parent.name in whitelist:
+			output+='{} '.format(t)
+	return output
+
 '''
 #raises error for status codes like 404,500 
 import urllib.request
@@ -133,11 +176,7 @@ def getResponseCode(url):
 #import httplib
 
 #def get_status_code(host, path="/"):
-    """ This function retreives the status code of a website by requesting
-        HEAD data from the host. This means that it only requests the headers.
-        If the host cannot be reached or something else goes wrong, it returns
-        None instead.
-    """
+    
  #   try:
  #       conn = httplib.HTTPConnection(host)
  #       conn.request("HEAD", path)
@@ -150,13 +189,13 @@ def getResponseCode(url):
 #print get_status_code("stackoverflow.com", "/nonexistant") # prints 404
 #Raise an error if an erroneous status code has been returned
 
-import requests
-try:
-    r = requests.head("https://stackoverflow.com")
-    print(r.status_code)
+#import requests
+#try:
+#    r = requests.head("https://stackoverflow.com")
+#    print(r.status_code)
     # prints the int of the status code. Find more at httpstatusrappers.com :)
-except requests.ConnectionError:
-    print("failed to connect")
+#except requests.ConnectionError:
+#    print("failed to connect")
 
 random.seed(365)
 
@@ -204,7 +243,7 @@ print("Open file")
 #give your choice of file
 #add relative path if in cwd or absolute path
 
-with open("_150_C1_urls.txt","r") as f:
+with open("test.txt","rt") as f:
 	urls=[url.split() for url in f.readlines()]
 	start_time=time.clock()
 	currlist=urls
@@ -215,19 +254,19 @@ with open("_150_C1_urls.txt","r") as f:
 	#clean urls(remove extra tags)
 	for lists in list_to_map:
 		for listin in lists:
+			print(listin)
 			for each,file in enumerate(listin,start=1):
-				print("{}.{}".format(each,file))
-				char=file.replace("u'http","http")
-				char=char.replace("[http","http")
-				char=char.replace("',"," ")
+				print(file)
+				#print("{}.{}".format(each,file))
+				#char=file.replace("u'http","http")
+				#char=char.replace("[http","http")
+				#char=char.replace("',"," ")
 
-				#print(char)
+				#print("URL is ",char)
 				try:
-					f=urllib.request.urlopen(char)
-					temp_file=f.read()
-					clean=cleanText(temp_file)
-
+					clean=parser(file)
 					print("Cleaned text is ",clean)
+				
 				except:
 					pass
 				#We now enter WMD calculation for our lists and keywords with URLS
@@ -351,7 +390,7 @@ final_df['nor_list_sim_score_300']=df_normalized['dis_list_score_300']
 #returns N rows (2 here) , this is just to check correctness of dataframe being created
 print("Test pandas",final_df.head(2))
 
-_150_C1_urls=final_df.to_csv("/home/abhishek/Avi/SimScore/CSV/_150_C1_urls.csv", header=True)
+test2=final_df.to_csv("/home/abhishek/Avi/SimScore/CSV/test2.csv", header=True)
 
 
 #TO-DO
