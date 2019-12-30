@@ -48,7 +48,9 @@ def read_input(input_file):
 
             yield gensim.utils.simple_preprocess(line)
 
-
+#Word2vec Solution
+#If you are using word2vec, you need to calculate the average vector for all words 
+#in every sentence and use cosine similarity between vectors. 
 def avg_feature_vector(sentence, model, num_features, index2word_set):
     words = sentence.split()
     feature_vec = np.zeros((num_features, ), dtype='float32')
