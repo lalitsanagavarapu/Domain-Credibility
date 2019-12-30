@@ -72,7 +72,7 @@ Network= ["Firewall","Rules","Port","OS","operating system","Management Console"
 Application = ["Operating System","Data","Database","File","Physical","Shred","Soft","Stationery","Flight","Transfer","Web","Logs"
 "Middle Tier","Logs"]
 Access=["Account","Directory Services","Authorization","Authentication","Cryptography"]
-OperationsControl=["Network","Security","Monitor","Asset" "Management","Classification","Tag","Audit","Audit",
+OperationsControl=["Network","Security","Monitor","AssetManagement","Classification","Tag","Audit","Audit",
                     "Incident","Threat","Vulnerability","Attack","Severity","Risk","Impact","Probability","Root cause analysis"]
 Management=["Policy","People","Recruit","Employee","Back Ground Verification","Vendor","Engage","Training","Awareness","Disciplinary",
 "Exit","Remote" , "Telework","Outsider","Standard","Procedure","Governance","Reporting","Review","Change Control","Patch",
@@ -290,8 +290,8 @@ with open("test.txt","rt") as f:
 						try:
 							#store WMD100 and WMD300 for pairs (url,word) and (url,list)
 							word300=w2v_model_300.wmdistance(word,clean)
-							word100=w2v_model_100.wmdistance(currlist,clean)
-							list100=w2v_model_300.wmdistance(word,clean)
+							list100=w2v_model_100.wmdistance(currlist,clean)
+							word100=w2v_model_100.wmdistance(word,clean)
 							list300=w2v_model_300.wmdistance(currlist,clean)
 							print('\n','word300 simcore of ',word,'with url=',char,'is',word300,'\n')
 							print('\n','word100 simcore of ',word,'with url=',char,'is',word100,'\n')

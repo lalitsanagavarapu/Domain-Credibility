@@ -61,6 +61,7 @@ def avg_feature_vector(sentence, model, num_features, index2word_set):
         feature_vec = np.divide(feature_vec, n_words)
     return feature_vec
 
+
 def own_phrase_simi(list1,list2):
     keys = []
     lines = []
@@ -304,15 +305,15 @@ def initmain():
 
     index2word_set = set(model.wv.index2word)
 
-    own_phrase_simi("This is a secuirty ontology".split(),"ontolgy for information secuirty".split())
+    #own_phrase_simi("This is a secuirty ontology".split(),"ontolgy for information secuirty".split())
 
 
-    s1_afv = avg_feature_vector('firewall', model=model, num_features=150, index2word_set=index2word_set)
-    s2_afv = avg_feature_vector('complex firewall', model=model, num_features=150, index2word_set=index2word_set)
+    #s1_afv = avg_feature_vector('firewall', model=model, num_features=150, index2word_set=index2word_set)
+    #s2_afv = avg_feature_vector('complex firewall', model=model, num_features=150, index2word_set=index2word_set)
 
-    sim = 1 - spatial.distance.cosine(s1_afv, s2_afv)
-    print(sim)#more similairty =less distance 
-    print(1-sim)
+    #sim = 1 - spatial.distance.cosine(s1_afv, s2_afv)
+    #print(sim)#more similairty =less distance 
+    #print(1-sim)
 
 
 
